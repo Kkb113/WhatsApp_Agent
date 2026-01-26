@@ -50,4 +50,5 @@ def get_events():
 if __name__ == "__main__":
     # NOTE: sensors require HTTPS on phone.
     # For local dev: run and use https via a tunnel (ngrok/cloudflared) OR localhost on device emulator.
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    port = int(os.environ.get("PORT", 5000))  # default to 5000 locally
+    app.run(host="0.0.0.0", port=port, debug=True)
