@@ -58,8 +58,33 @@ class WhatsAppAgent:
         if not found:
             print(f"{columns} Not Available")
 
-        print(self.candidate)
-            
+    def build_content_variables(self, twilio_template_role = None):
+        self.twilio_template_role = []
+
+
+        if not self.candidate:
+            print("Candidate profiles is empty")
+            return
+        
+        name_index, company_index = 1, 2
+
+        for profile in self.candidate:
+            for name, data in profile.items():
+                company = data["Company"]
+                self.twilio_template_role.append({f"{name_index}": name, f"{company_index}": company})
+
+
+        print(self.twilio_template_role)
+
+
+
+
+
+    def main(self):
+        self.load_recipients()
+        self.build_content_variables()
+
 if __name__ == '__main__':
     run = WhatsAppAgent()
-    run.load_recipients()
+    run.main()
+
